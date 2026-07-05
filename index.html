@@ -5,68 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CHEM QUEST 実験まとめ 二連戦</title>
 <style>
-  :root{
-    --bg:#071420; --panel:#102234; --line:#34536f; --text:#f4fbff;
-    --cyan:#24d7ff; --pink:#ff4fc3; --yellow:#ffd84a; --green:#5cff6d;
-    --red:#ff5364; --orange:#ff9f37;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; min-height:100vh; background:radial-gradient(circle at top,#14324a,#06111c 65%);
-    color:var(--text); font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;
-  }
-  .wrap{max-width:1320px;margin:0 auto;padding:22px}
-  header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
-  .logo{font-size:42px;font-weight:900;color:var(--yellow);letter-spacing:.04em;text-shadow:0 3px 0 #000}
-  .sub{color:#b8d3e8;font-size:16px}
-  .status{display:flex;gap:12px;flex-wrap:wrap}
-  .pill{border:2px solid var(--line);border-radius:999px;padding:11px 18px;background:#0b1a29;font-weight:800}
-  .pill.hp{border-color:#28cfff}
-  .game{display:grid;grid-template-columns:340px 1fr;gap:18px}
-  .panel{background:rgba(16,34,52,.96);border:2px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.25)}
-  .boss-title{color:var(--pink);font-size:24px;font-weight:900;margin:0 0 10px}
-  .boss-name{font-size:22px;font-weight:900}
-  .boss-art{height:265px;display:flex;align-items:center;justify-content:center;background:#07111b;border:2px solid #24425c;border-radius:16px;margin:18px 0;position:relative;overflow:hidden}
-  .monster-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-  .boss-art.hit{animation:shake .35s}
-  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
-  .bar{height:18px;background:#07111b;border:2px solid #274764;border-radius:999px;overflow:hidden}
-  .fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow));width:100%;transition:.4s}
-  .player .fill{background:linear-gradient(90deg,#27df68,#a7ff4f)}
-  .small{color:#bdd6e8;font-size:14px;line-height:1.7}
-  .main{display:flex;flex-direction:column;gap:14px}
-  .chapter{display:flex;justify-content:space-between;gap:12px;align-items:center}
-  .chapter h1{margin:0;color:var(--cyan);font-size:28px}
-  .tag{background:var(--yellow);color:#08121d;border-radius:999px;padding:8px 14px;font-weight:900}
-  .question{font-size:24px;line-height:1.8;margin:8px 0 16px}
-  .choices{display:grid;gap:12px}
-  .choice{
-    width:100%;text-align:left;border:2px solid #5a7894;border-radius:14px;background:#172b3e;
-    color:white;padding:17px 20px;font-size:21px;line-height:1.5;cursor:pointer;transition:.15s
-  }
-  .choice:hover,.choice.selected{border-color:#91e5ff;background:#213d56;transform:translateY(-1px)}
-  .choice.correct{border-color:var(--green);background:#123d2b}
-  .choice.wrong{border-color:var(--red);background:#431b25}
-  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-  button.action{
-    border:none;border-radius:13px;padding:15px 28px;color:white;font-size:20px;font-weight:900;cursor:pointer;
-    background:linear-gradient(180deg,#ef7d36,#b94420);border:2px solid #ff9e5b
-  }
-  button.next{background:linear-gradient(180deg,#12bde4,#08769c);border-color:#42e5ff}
-  button.reset{background:#1b2d40;border-color:#6e91ad}
-  .result{min-height:120px;border:2px solid #2b4b66;border-radius:14px;background:#081521;padding:16px;margin-top:14px;font-size:20px;line-height:1.7}
-  .result strong{color:var(--yellow)}
-  .data{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-  .data div{background:#071521;border:1px solid #2b4b66;border-radius:12px;padding:12px;text-align:center;font-weight:800}
-  .formula{font-size:22px;text-align:center;background:#071521;border:2px solid #3d617d;border-radius:14px;padding:16px;margin-top:14px}
-  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:10}
-  .modal{max-width:720px;background:#0b1d2d;border:3px solid var(--yellow);border-radius:24px;padding:36px;text-align:center;box-shadow:0 0 60px rgba(255,216,74,.35)}
-  .modal h2{font-size:52px;color:var(--yellow);margin:0 0 12px;text-shadow:0 4px 0 #000}
-  .modal p{font-size:24px;line-height:1.7}
-  .flash{animation:flash .7s}
-  @keyframes flash{0%{filter:brightness(1)}50%{filter:brightness(2)}100%{filter:brightness(1)}}
-  .footer-note{margin-top:14px;color:#9fc2da;font-size:14px}
-  @media(max-width:900px){.game{grid-template-columns:1fr}.logo{font-size:34px}.question{font-size:21px}.choice{font-size:18px}.boss-art{height:190px}}
+:root{
+  --bg:#06111c; --panel:#102234; --panel2:#0b1a29; --line:#365979;
+  --text:#f4fbff; --muted:#b8d3e8; --cyan:#24d7ff; --pink:#ff4fc3;
+  --yellow:#ffd84a; --green:#63ff7c; --red:#ff5364; --orange:#ff9f37;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; color:var(--text);
+  background:radial-gradient(circle at 50% 0%,#183d59,#06111c 64%);
+  font-family:"Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+.wrap{max-width:1280px;margin:0 auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.logo{font-size:40px;font-weight:900;color:var(--yellow);letter-spacing:.04em;text-shadow:0 4px 0 #000}
+.sub{color:var(--muted);font-size:16px}
+.status{display:flex;gap:10px;flex-wrap:wrap}
+.pill{border:2px solid var(--line);border-radius:999px;padding:10px 15px;background:#0b1a29;font-weight:900}
+.pill.hp{border-color:#28cfff}
+.game{display:grid;grid-template-columns:360px 1fr;gap:18px}
+.panel{
+  background:rgba(16,34,52,.96); border:2px solid var(--line); border-radius:18px;
+  padding:18px; box-shadow:0 12px 30px rgba(0,0,0,.25)
+}
+.boss-title{color:var(--pink);font-size:22px;font-weight:900;margin:0 0 10px}
+.boss-name{font-size:23px;font-weight:900}
+.boss-sub{color:var(--muted);line-height:1.6}
+.boss-art{
+  height:290px; display:flex; align-items:center; justify-content:center;
+  background:#07111b; border:2px solid #24425c; border-radius:16px; margin:15px 0;
+  overflow:hidden; position:relative;
+}
+.boss-art img{width:210%; max-width:none; height:100%; object-fit:contain; filter:drop-shadow(0 12px 12px rgba(0,0,0,.45))}
+.boss-art.slime img{object-position:left center}
+.boss-art.golem img{object-position:right center}
+.emojiFallback{font-size:110px}
+.hit{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+.bar{height:18px;background:#07111b;border:2px solid #274764;border-radius:999px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow));width:100%;transition:.4s}
+.player .fill{background:linear-gradient(90deg,#23d965,#bdff52)}
+.playerbox{padding:14px;margin-top:14px;border-color:#20c8ff}
+.small{color:#bdd6e8;font-size:14px;line-height:1.7}
+.main{display:flex;flex-direction:column;gap:14px}
+.chapter{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.chapter h1{margin:0;color:var(--cyan);font-size:28px}
+.tag{background:var(--yellow);color:#08121d;border-radius:999px;padding:8px 14px;font-weight:900}
+.data{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.data div{background:#071521;border:1px solid #2b4b66;border-radius:12px;padding:12px;text-align:center;font-weight:900}
+.formula{font-size:21px;text-align:center;background:#071521;border:2px solid #3d617d;border-radius:14px;padding:15px;margin-top:14px;line-height:1.7}
+.questionNo{color:var(--pink);font-size:28px;font-weight:900}
+.question{font-size:24px;line-height:1.75;margin:8px 0 16px}
+.choices{display:grid;gap:12px}
+.choice{
+  width:100%;text-align:left;border:2px solid #5a7894;border-radius:14px;background:#172b3e;
+  color:white;padding:16px 19px;font-size:20px;line-height:1.5;cursor:pointer;transition:.15s
+}
+.choice:hover,.choice.selected{border-color:#91e5ff;background:#213d56;transform:translateY(-1px)}
+.choice.correct{border-color:var(--green);background:#123d2b}
+.choice.wrong{border-color:var(--red);background:#431b25}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+button.action{
+  border:none;border-radius:13px;padding:14px 26px;color:white;font-size:20px;font-weight:900;cursor:pointer;
+  background:linear-gradient(180deg,#ef7d36,#b94420);border:2px solid #ff9e5b
+}
+button.next{background:linear-gradient(180deg,#12bde4,#08769c);border-color:#42e5ff}
+button.reset{background:#1b2d40;border-color:#6e91ad}
+.result{min-height:130px;border:2px solid #2b4b66;border-radius:14px;background:#081521;padding:16px;margin-top:14px;font-size:20px;line-height:1.7}
+.result strong{color:var(--yellow)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;z-index:10;padding:20px}
+.modal{max-width:740px;background:#0b1d2d;border:3px solid var(--yellow);border-radius:24px;padding:34px;text-align:center;box-shadow:0 0 60px rgba(255,216,74,.35)}
+.modal h2{font-size:50px;color:var(--yellow);margin:0 0 12px;text-shadow:0 4px 0 #000}
+.modal p{font-size:23px;line-height:1.7}
+.flash{animation:flash .7s}
+@keyframes flash{0%{filter:brightness(1)}50%{filter:brightness(2.1)}100%{filter:brightness(1)}}
+.footer-note{margin-top:14px;color:#9fc2da;font-size:14px}
+@media(max-width:900px){
+  .game{grid-template-columns:1fr}.logo{font-size:32px}.question{font-size:20px}.choice{font-size:18px}
+  .boss-art{height:220px}.data{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -87,32 +104,32 @@
   <div class="game">
     <aside class="panel">
       <p class="boss-title">BOSS</p>
-      <div class="boss-name" id="bossName">炭酸水素ナトリウムの謎</div>
-      <p class="small" id="bossSub">熱分解の化学反応式を見抜け。</p>
+      <div class="boss-name" id="bossName"></div>
+      <p class="boss-sub" id="bossSub"></p>
       <div class="bar"><div class="fill" id="bossHpBar"></div></div>
-      <p style="text-align:right;font-weight:800" id="bossHpText">120 / 120</p>
-      <div class="boss-art" id="bossArt"><img class="monster-img" src="assets/monsters.png" alt="HClスライムとCaCO3ゴーレム"></div>
+      <p style="text-align:right;font-weight:900" id="bossHpText"></p>
+      <div class="boss-art" id="bossArt"></div>
 
-      <div class="panel player" style="padding:14px;margin-top:14px;border-color:#20c8ff">
+      <div class="panel player playerbox">
         <div style="font-size:22px;font-weight:900;color:#77e8ff">⚔ PLAYER：あなた</div>
         <div class="bar" style="margin-top:10px"><div class="fill" id="playerHpBar"></div></div>
-        <p style="text-align:right;font-weight:800" id="playerHpText">100 / 100</p>
-        <p class="small">ミスするとHPが減少。3ミスで敗北。</p>
+        <p style="text-align:right;font-weight:900" id="playerHpText">100 / 100</p>
+        <p class="small">攻撃失敗でHP減少。3ミスで敗北。同じ問題に再挑戦できます。</p>
       </div>
     </aside>
 
     <main class="main">
       <section class="panel">
         <div class="chapter">
-          <h1 id="chapterTitle">第1戦：熱分解の式を決めろ</h1>
-          <span class="tag" id="questionTag">式量</span>
+          <h1 id="chapterTitle"></h1>
+          <span class="tag" id="questionTag"></span>
         </div>
         <div class="data" id="dataBox"></div>
         <div class="formula" id="formulaBox"></div>
       </section>
 
       <section class="panel">
-        <div style="color:var(--pink);font-size:28px;font-weight:900" id="questionNo">問題 1</div>
+        <div class="questionNo" id="questionNo">問題 1</div>
         <div class="question" id="questionText"></div>
         <div class="choices" id="choices"></div>
 
@@ -126,7 +143,7 @@
       </section>
     </main>
   </div>
-  <div class="footer-note">GitHub用Zip版。index.html と assets/monsters.png を同じ構成でアップしてください。</div>
+  <div class="footer-note">GitHub Pages対応：index.html と img/monsters.png を同じ構成で配置してください。</div>
 </div>
 
 <div class="overlay" id="overlay">
@@ -140,60 +157,66 @@
 <script>
 const battles = [
   {
-    title:"第1戦：熱分解の式を決めろ",
-    bossName:"炭酸水素ナトリウムの謎",
-    bossSub:"熱分解の化学反応式を見抜け。",
-    bossArt:"🔥🧂",
-    hp:120,
-    data:["NaHCO₃ = 84","NaOH = 40","Na₂CO₃ = 106","Na₂O = 62","加熱前 約8.4g","残った白色固体を比較"],
+    title:"第1戦：熱分解スライム",
+    bossName:"熱分解スライム",
+    bossSub:"炭酸水素ナトリウムの熱分解式を、質量から見抜け。",
+    bossClass:"slime",
+    emoji:"🧪",
+    hp:160,
+    data:["NaHCO₃ = 84","NaOH = 40","Na₂CO₃ = 106","Na₂O = 62","加熱前 約8.4g","実測値 約5.3g"],
     formula:"候補：(a) NaHCO₃→NaOH+CO₂　(b) 2NaHCO₃→Na₂CO₃+H₂O+CO₂　(c) 2NaHCO₃→Na₂O+H₂O+2CO₂",
     questions:[
-      {tag:"物質量", q:"NaHCO₃を8.4g加熱した。NaHCO₃の物質量は？", a:"0.10 mol", choices:["0.10 mol","1.0 mol","0.084 mol","8.4 mol"], exp:"NaHCO₃の式量は84。8.4÷84=0.10 mol。まず物質量に直すことで、係数比で考えられる。"},
-      {tag:"理論値", q:"反応式(b) 2NaHCO₃→Na₂CO₃+H₂O+CO₂ なら、0.10molのNaHCO₃からNa₂CO₃は何molできる？", a:"0.050 mol", choices:["0.050 mol","0.10 mol","0.20 mol","0.0050 mol"], exp:"係数比は NaHCO₃:Na₂CO₃=2:1。したがって0.10molの半分、0.050molのNa₂CO₃ができる。"},
+      {tag:"物質量", q:"NaHCO₃を8.4g加熱した。NaHCO₃の物質量は？", a:"0.10 mol", choices:["0.10 mol","1.0 mol","0.084 mol","8.4 mol"], exp:"NaHCO₃の式量は84。8.4÷84=0.10mol。"},
+      {tag:"理論値", q:"反応式(b) 2NaHCO₃→Na₂CO₃+H₂O+CO₂ なら、0.10molのNaHCO₃からNa₂CO₃は何molできる？", a:"0.050 mol", choices:["0.050 mol","0.10 mol","0.20 mol","0.0050 mol"], exp:"係数比は NaHCO₃:Na₂CO₃=2:1。0.10molの半分、0.050molのNa₂CO₃ができる。"},
       {tag:"質量", q:"0.050molのNa₂CO₃の質量は？（Na₂CO₃=106）", a:"5.3 g", choices:["5.3 g","10.6 g","4.0 g","6.2 g"], exp:"0.050×106=5.3g。実験で残った白色固体の質量がこの値に近ければ、(b)を支持する証拠になる。"},
-      {tag:"考察", q:"質量の比較だけで反応式を考えるとき、一番大切なのはどれ？", a:"候補ごとの理論値と実測値を比べること", choices:["候補ごとの理論値と実測値を比べること","見た目の色だけで判断すること","加熱時間だけで決めること","気体が出たら全部同じ反応と考えること"], exp:"実験データを証拠にするには、候補ごとの理論値を計算し、実測値と比較する必要がある。"}
+      {tag:"考察", q:"質量の比較だけで反応式を考えるとき、一番大切なのはどれ？", a:"候補ごとの理論値と実測値を比べること", choices:["候補ごとの理論値と実測値を比べること","見た目の色だけで判断すること","加熱時間だけで決めること","気体が出たら全部同じ反応と考えること"], exp:"実験データを証拠にするには、候補ごとの理論値を計算し、実測値と比較する必要がある。"},
+      {tag:"FINAL", q:"実験で残った白色固体の質量が約5.3gだった。この結果から最も適切な化学反応式はどれ？", a:"(b) 2NaHCO₃→Na₂CO₃+H₂O+CO₂", choices:["(a) NaHCO₃→NaOH+CO₂","(b) 2NaHCO₃→Na₂CO₃+H₂O+CO₂","(c) 2NaHCO₃→Na₂O+H₂O+2CO₂"], exp:"実測値約5.3gと理論値が一致するのは(b)。よって、炭酸水素ナトリウムの熱分解は 2NaHCO₃→Na₂CO₃+H₂O+CO₂ と考えられる。", final:true}
     ]
   },
   {
-    title:"第2戦：未知の塩酸濃度を攻略せよ",
-    bossName:"未知の塩酸ボス",
-    bossSub:"グラフ・式量・係数比で濃度を見抜け。",
-    bossArt:"🧪🪨",
-    hp:160,
-    data:["CaCO₃ = 100","CO₂ = 44","HCl = 36.5","塩酸 20mL","係数比 CaCO₃:HCl:CO₂ = 1:2:1","グラフの折れ曲がりに注目"],
+    title:"第2戦：CaCO₃ゴーレム",
+    bossName:"CaCO₃ゴーレム",
+    bossSub:"グラフ・式量・係数比で未知の塩酸濃度を攻略せよ。",
+    bossClass:"golem",
+    emoji:"🪨",
+    hp:200,
+    data:["CaCO₃ = 100","CO₂ = 44","HCl = 36.5","塩酸 20mL = 0.020L","係数比 CaCO₃:HCl:CO₂ = 1:2:1","交点に注目"],
     formula:"CaCO₃ + 2HCl → CaCl₂ + CO₂ + H₂O",
     questions:[
-      {tag:"原点", q:"CaCO₃をまったく加えないとCO₂は発生しない。このとき近似線について最も適切なのは？", a:"原点(0,0)を通る線として考える", choices:["原点(0,0)を通る線として考える","原点を通らない線にする","横軸と平行な線にする","グラフは描けない"], exp:"CaCO₃が0ならCO₂も0。実験条件から考えて、最初の直線部分は原点を通ると考えるのが自然。"},
+      {tag:"原点", q:"CaCO₃をまったく加えないとCO₂は発生しない。このとき近似線について最も適切なのは？", a:"原点(0,0)を通る線として考える", choices:["原点(0,0)を通る線として考える","原点を通らない線にする","横軸と平行な線にする","グラフは描けない"], exp:"CaCO₃が0ならCO₂も0。実験条件から、最初の直線部分は原点を通ると考えるのが自然。"},
       {tag:"モデル", q:"CaCO₃を増やすとCO₂は最初増えるが、途中から増えなくなる。最も適切なモデルは？", a:"二本の直線で近似する", choices:["二本の直線で近似する","一本の曲線で近似する","最後まで一本の直線で増え続ける","点を結ばず考えない"], exp:"最初はCaCO₃が不足して反応が進む。途中からHClが不足し、CO₂発生量が頭打ちになるため、二本の直線で考える。"},
       {tag:"交点", q:"グラフの折れ曲がる点・交点は何を意味する？", a:"HClとCaCO₃が過不足なく反応する点", choices:["HClとCaCO₃が過不足なく反応する点","反応が始まる点","CO₂が水に全部溶けた点","測定ミスだけを表す点"], exp:"折れ曲がる点は、CaCO₃を増やしてもCO₂が増えなくなる境目。HClがちょうど使い切られる点と考えられる。"},
-      {tag:"係数比", q:"交点でCaCO₃が0.030mol必要だった。HClの物質量は？", a:"0.060 mol", choices:["0.060 mol","0.030 mol","0.015 mol","0.090 mol"], exp:"反応式の係数比は CaCO₃:HCl=1:2。CaCO₃が0.030molなら、HClはその2倍で0.060mol。"},
-      {tag:"濃度", q:"20mLの塩酸中にHClが0.060mol含まれていた。この塩酸のモル濃度は？", a:"3.0 mol/L", choices:["3.0 mol/L","0.30 mol/L","1.5 mol/L","0.060 mol/L"], exp:"20mL=0.020L。モル濃度=0.060÷0.020=3.0mol/L。", final:true}
+      {tag:"係数比", q:"グラフより、20mLの塩酸と過不足なく反応するCaCO₃は3.0gだった。CaCO₃の物質量は？（CaCO₃=100）", a:"0.030 mol", choices:["0.030 mol","0.30 mol","0.015 mol","0.060 mol"], exp:"CaCO₃=100なので、3.0÷100=0.030mol。"},
+      {tag:"HCl量", q:"CaCO₃が0.030mol過不足なく反応した。HClの物質量は？", a:"0.060 mol", choices:["0.060 mol","0.030 mol","0.015 mol","0.090 mol"], exp:"反応式の係数比は CaCO₃:HCl=1:2。CaCO₃が0.030molなら、HClはその2倍で0.060mol。"},
+      {tag:"FINAL", q:"20mLの塩酸中にHClが0.060mol含まれていた。この塩酸のモル濃度は？", a:"3.0 mol/L", choices:["3.0 mol/L","0.30 mol/L","1.5 mol/L","0.060 mol/L"], exp:"20mL=0.020L。モル濃度=物質量÷体積[L]なので、0.060÷0.020=3.0mol/L。", final:true}
     ]
   }
 ];
 
-let battleIndex=0, qIndex=0, selected=null, playerHp=100, misses=0, correctCount=0;
-let currentQuestions=[], bossHp=0, bossMax=0;
+let battleIndex=0, qIndex=0, selected=null, playerHp=100, misses=0;
+let currentQuestions=[], bossHp=0, bossMax=0, answered=false;
 
 function shuffle(arr){ return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
 
 function startBattle(i){
-  battleIndex=i; qIndex=0; selected=null;
+  battleIndex=i; qIndex=0; selected=null; answered=false;
   const b=battles[i];
   currentQuestions=b.questions.map(q=>({...q, choices:shuffle(q.choices)}));
   bossHp=b.hp; bossMax=b.hp;
   document.getElementById("chapterTitle").textContent=b.title;
   document.getElementById("bossName").textContent=b.bossName;
   document.getElementById("bossSub").textContent=b.bossSub;
-  document.getElementById("bossArt").innerHTML=`<img class="monster-img" src="assets/monsters.png" alt="HClスライムとCaCO3ゴーレム">`;
+  const art = document.getElementById("bossArt");
+  art.className = "boss-art " + b.bossClass;
+  art.innerHTML = `<img src="img/monsters.png" alt="${b.bossName}" onerror="this.remove();document.getElementById('bossArt').innerHTML='<span class=emojiFallback>${b.emoji}</span>'">`;
   document.getElementById("dataBox").innerHTML=b.data.map(x=>`<div>${x}</div>`).join("");
   document.getElementById("formulaBox").textContent=b.formula;
-  loadQuestion();
-  updateBars();
+  loadQuestion(); updateBars();
 }
+
 function loadQuestion(){
-  selected=null;
-  const q=currentQuestions[qIndex], b=battles[battleIndex];
+  selected=null; answered=false;
+  const q=currentQuestions[qIndex];
   document.getElementById("stagePill").textContent=`連戦 ${battleIndex+1}/2`;
   document.getElementById("qPill").textContent=`問題 ${qIndex+1}/${currentQuestions.length}`;
   document.getElementById("questionTag").textContent=q.tag;
@@ -201,10 +224,11 @@ function loadQuestion(){
   document.getElementById("questionText").textContent=q.q;
   document.getElementById("choices").innerHTML=q.choices.map((c,idx)=>`<button class="choice" data-choice="${c}">${String.fromCharCode(65+idx)}. ${c}</button>`).join("");
   document.querySelectorAll(".choice").forEach(btn=>{
-    btn.onclick=()=>{ document.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected")); btn.classList.add("selected"); selected=btn.dataset.choice; };
+    btn.onclick=()=>{ if(answered) return; document.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected")); btn.classList.add("selected"); selected=btn.dataset.choice; };
   });
   document.getElementById("resultBox").textContent="選択肢を選んで「こうげき！」を押そう。";
 }
+
 function updateBars(){
   document.getElementById("bossHpBar").style.width=`${Math.max(0,bossHp/bossMax*100)}%`;
   document.getElementById("bossHpText").textContent=`${Math.max(0,bossHp)} / ${bossMax}`;
@@ -213,7 +237,9 @@ function updateBars(){
   document.getElementById("playerHpTop").textContent=`あなたHP ${playerHp}/100`;
   document.getElementById("missPill").textContent=`❤ ミス ${misses}/3`;
 }
+
 function attack(){
+  if(answered) return;
   if(!selected){ document.getElementById("resultBox").innerHTML="先に選択肢を選ぼう。"; return; }
   const q=currentQuestions[qIndex];
   const buttons=[...document.querySelectorAll(".choice")];
@@ -221,9 +247,10 @@ function attack(){
     if(btn.dataset.choice===q.a) btn.classList.add("correct");
     if(btn.dataset.choice===selected && selected!==q.a) btn.classList.add("wrong");
   });
+  answered=true;
   if(selected===q.a){
-    let damage=q.final ? 999 : 35;
-    bossHp=Math.max(0,bossHp-damage); correctCount++;
+    const damage=q.final ? 999 : 40;
+    bossHp=Math.max(0,bossHp-damage);
     const art=document.getElementById("bossArt"); art.classList.add("hit"); setTimeout(()=>art.classList.remove("hit"),360);
     document.body.classList.add("flash"); setTimeout(()=>document.body.classList.remove("flash"),700);
     document.getElementById("resultBox").innerHTML=`<strong>${q.final?"かいしんのいちげき！":"正解！"}</strong><br>${damage}ダメージ！<br><br>${q.exp}`;
@@ -244,15 +271,23 @@ function attack(){
     }
   }
 }
+
 function next(){
   if(misses>=3) return;
+  if(!answered){ document.getElementById("resultBox").innerHTML="先に攻撃して、解説を確認しよう。"; return; }
   if(bossHp<=0){
-    if(battleIndex===0){ startBattle(1); return; }
+    if(battleIndex===0){ closeModal(); startBattle(1); return; }
+    return;
+  }
+  const q=currentQuestions[qIndex];
+  if(selected!==q.a){
+    loadQuestion();
     return;
   }
   qIndex=(qIndex+1)%currentQuestions.length;
   loadQuestion();
 }
+
 function showModal(title,text){
   document.getElementById("modalTitle").innerHTML=title;
   document.getElementById("modalText").innerHTML=text;
@@ -260,7 +295,7 @@ function showModal(title,text){
 }
 function closeModal(){ document.getElementById("overlay").style.display="none"; }
 function resetGame(){
-  closeModal(); battleIndex=0; playerHp=100; misses=0; correctCount=0; startBattle(0);
+  closeModal(); battleIndex=0; playerHp=100; misses=0; startBattle(0);
 }
 document.getElementById("attackBtn").onclick=attack;
 document.getElementById("nextBtn").onclick=next;
