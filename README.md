@@ -1,25 +1,25 @@
-# CHEM QUEST｜実験まとめ 二連戦｜確認済み v1.1
+# CHEM QUEST｜実験まとめ 二連戦 Ver.2
 
-## 入っている内容
-
-### 第1戦：熱分解スライム
-- スライム画像のみ表示
-- NaHCO3の物質量
-- Na2CO3の物質量
-- Na2CO3の質量
-- 実測値と理論値の比較
-- 最終問題：結論として、(a)(b)(c)から化学反応式を選択
-- 正解で「かいしんのいちげき！」→ LEVEL UP
-
-### 第2戦：CaCO3ゴーレム
-- ゴーレム画像のみ表示
-- 原点を通る
-- 二本の直線
-- 交点の意味
-- CaCO3の物質量
-- HClの物質量
-- 最終問題：20.0mL塩酸のモル濃度を計算
-- 正解で「かいしんのいちげき！」→ MISSION COMPLETE
+## 変更点
+- 第1戦はスライム画像のみ表示
+- 第2戦はゴーレム画像のみ表示
+- monsters.png は使わず、img/slime.png と img/golem.png に分割
+- 第1戦の最終問題は、(a)(b)(c)から化学反応式を選択
+- 第2戦の最終問題は、20.0mL塩酸のモル濃度を計算
+- 正解位置はランダム
+- 不正解は同じ問題に再挑戦
+- 正誤に関わらず解説表示
+- 最終問題は「かいしんのいちげき！」
+- 第1戦クリアで LEVEL UP
+- 第2戦クリアで MISSION COMPLETE
 
 ## GitHub Pages
-Zipを解凍し、index.html と img フォルダをそのままアップロードしてください。
+Zipを解凍して、以下をそのままリポジトリにアップロードしてください。
+
+- index.html
+- style.css
+- script.js
+- img/slime.png
+- img/golem.png
+
+Settings → Pages → Deploy from branch → main / root
