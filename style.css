@@ -67,3 +67,71 @@ button.reset{background:#1b2d40;border-color:#6e91ad}
   .game{grid-template-columns:1fr}.logo{font-size:32px}.question{font-size:20px}.choice{font-size:18px}
   .boss-art{height:220px}.data{grid-template-columns:1fr 1fr}
 }
+
+/* Ver.3 responsive: iPad・スマホ縦画面で1画面に収まりやすくする */
+@media (max-width: 1024px){
+  .wrap{padding:10px;max-width:100%}
+  header{margin-bottom:8px;gap:8px;align-items:flex-start}
+  .logo{font-size:28px;line-height:1.05}
+  .sub{font-size:12px}
+  .status{gap:5px}
+  .pill{padding:6px 9px;font-size:12px}
+  .game{grid-template-columns:1fr;gap:8px}
+  .panel{border-radius:13px;padding:10px}
+  aside.panel{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    grid-template-areas:"art info" "player player";
+    gap:8px;align-items:center;
+  }
+  .boss-title,.boss-name,.boss-sub,aside.panel>.bar,aside.panel>.hpText{grid-column:2}
+  .boss-title{margin:0;font-size:14px}
+  .boss-name{font-size:18px}
+  .boss-sub{margin:0;font-size:12px;line-height:1.35}
+  aside.panel>.bar{height:14px}
+  aside.panel>.hpText{margin:0;font-size:12px}
+  .boss-art{grid-area:art;height:128px;margin:0}
+  .boss-art img{max-width:118%;max-height:118%}
+  .playerbox{grid-area:player;margin-top:0;padding:8px}
+  .player-title{font-size:16px}
+  .playerbox .bar{height:13px;margin-top:5px!important}
+  .playerbox .hpText{margin:2px 0;font-size:12px}
+  .small{font-size:11px;line-height:1.35;margin:0}
+  .main{gap:8px}
+  .chapter h1{font-size:18px}
+  .tag{padding:5px 9px;font-size:12px}
+  .data{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+  .data div{padding:7px 5px;font-size:12px;line-height:1.25}
+  .formula{font-size:13px;padding:8px;margin-top:8px;line-height:1.4}
+  .questionNo{font-size:19px}
+  .question{font-size:17px;line-height:1.55;margin:5px 0 8px}
+  .choices{gap:7px}
+  .choice{padding:9px 10px;font-size:15px;border-radius:10px;line-height:1.35}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+  #attackBtn{grid-column:1/-1}
+  button.action{width:100%;padding:10px 12px;font-size:16px;border-radius:10px}
+  .result{min-height:72px;max-height:20vh;overflow:auto;font-size:14px;line-height:1.45;padding:9px;margin-top:8px;border-radius:10px}
+  .footer-note{display:none}
+}
+@media (max-width: 520px){
+  .wrap{padding:7px}
+  header{flex-direction:column}
+  .status{width:100%;justify-content:space-between}
+  .pill{font-size:11px;padding:5px 7px}
+  aside.panel{grid-template-columns:105px 1fr}
+  .boss-art{height:105px}
+  .boss-name{font-size:16px}
+  .boss-sub{font-size:11px}
+  .data{grid-template-columns:repeat(2,1fr)}
+  .data div{font-size:11px}
+  .formula{font-size:12px}
+  .question{font-size:16px}
+  .choice{font-size:14px;padding:8px 9px}
+  button.action{font-size:15px;padding:9px 10px}
+  .result{max-height:18vh}
+}
+@media (orientation: portrait) and (min-width:700px) and (max-width:1100px){
+  aside.panel{grid-template-columns:160px 1fr}
+  .boss-art{height:150px}
+  .result{max-height:18vh}
+}

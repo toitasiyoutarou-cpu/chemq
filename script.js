@@ -30,7 +30,7 @@ const battles = [
       {tag:"交点", q:"グラフの折れ曲がる点・交点は何を意味する？", a:"HClとCaCO₃が過不足なく反応する点", choices:["HClとCaCO₃が過不足なく反応する点","反応が始まる点","CO₂が水に全部溶けた点","測定ミスだけを表す点"], exp:"折れ曲がる点は、CaCO₃を増やしてもCO₂が増えなくなる境目。HClがちょうど使い切られる点と考えられる。"},
       {tag:"CaCO₃量", q:"グラフより、20mLの塩酸と過不足なく反応するCaCO₃は3.0gだった。CaCO₃の物質量は？（CaCO₃=100）", a:"0.030 mol", choices:["0.030 mol","0.30 mol","0.015 mol","0.060 mol"], exp:"CaCO₃=100なので、3.0÷100=0.030mol。"},
       {tag:"HCl量", q:"CaCO₃が0.030mol過不足なく反応した。HClの物質量は？", a:"0.060 mol", choices:["0.060 mol","0.030 mol","0.015 mol","0.090 mol"], exp:"反応式の係数比は CaCO₃:HCl=1:2。CaCO₃が0.030molなら、HClはその2倍で0.060mol。"},
-      {tag:"FINAL", q:"20.0mLの塩酸中にHClが0.060mol含まれていた。この塩酸のモル濃度は？", a:"3.0 mol/L", choices:["3.0 mol/L","0.30 mol/L","1.5 mol/L","0.060 mol/L"], exp:"20.0mL=0.0200L。モル濃度=物質量÷体積[L]なので、0.060÷0.0200=3.0mol/L。", final:true}
+      {tag:"FINAL", q:"【最終問題】20.0mLの塩酸中にHClが0.060mol含まれていた。この塩酸のモル濃度 M は？", a:"3.0 mol/L", choices:["3.0 mol/L","0.30 mol/L","1.5 mol/L","0.060 mol/L"], exp:"20.0mL=0.0200L。モル濃度 M=物質量 n÷体積 V[L]。したがって、M=0.060÷0.0200=3.0mol/L。", final:true}
     ]
   }
 ];
